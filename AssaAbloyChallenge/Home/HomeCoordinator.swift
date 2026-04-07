@@ -11,6 +11,8 @@ import Combine
 final class HomeCoordinator: Coordinator, ObservableObject {
     let dependencies: AppDependencies
     
+    var onLogout: (() -> Void)?
+    
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
     }

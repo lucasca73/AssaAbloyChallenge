@@ -22,11 +22,11 @@ struct AuthRouterView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            authCoordinator.makeSignin()
+            authCoordinator.makeSignin(router: router)
                 .navigationDestination(for: AuthRoutes.self) { route in
                 switch route {
                 case .signin:
-                    authCoordinator.makeSignin()
+                    authCoordinator.makeSignin(router: router)
                 case .signup:
                     authCoordinator.makeSignUp()
                 }

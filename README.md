@@ -33,3 +33,5 @@ The list supports pagination and allow user to search by name
 20min - Create the project, README, Initial Planning.
 
 60min - Setup project architecture, clean initial project files, implement base navigation
+
+90min - Implement Base UI Components, Auth Navigation, SignIn screen and base NetworkService

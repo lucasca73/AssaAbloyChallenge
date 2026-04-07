@@ -9,5 +9,5 @@ import Foundation
 
 // Container to inject dependencies on ViewModels
 class AppDependencies {
-    
+    var networkService = NetworkService()
 }

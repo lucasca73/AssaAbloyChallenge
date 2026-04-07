@@ -10,13 +10,25 @@ import Combine
 
 final class AuthCoordinator: Coordinator, ObservableObject {
     let dependencies: AppDependencies
+    var onAuthSuccess: (() -> Void)?
     
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
     }
     
-    func makeSignin() -> some View {
-        return SigninView()
+    func makeSignin(router: AuthRouter) -> some View {
+        let viewModel = SignInViewModel(loginService: dependencies.networkService)
+        
+        viewModel.onSignUp = {
+            router.navigate(to: .signup)
+        }
+        
+        viewModel.onLoginSuccess = { [weak self] in
+            self?.onAuthSuccess?()
+        }
+        
+        let view = SigninView(viewModel: viewModel)
+        return view
     }
     
     func makeSignUp() -> some View {

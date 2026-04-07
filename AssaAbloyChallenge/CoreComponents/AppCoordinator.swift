@@ -20,18 +20,28 @@ class AppCoordinator: ObservableObject {
     @Published var activeFlow: AppFlow
     
     
-    init(initialRoute: AppFlow) {
+    init(initialRoute: AppFlow = .auth) {
         // Setup dependencies
         dependencies = AppDependencies()
         activeFlow = initialRoute
     }
     
     func makeAuthCoordinator() -> AuthCoordinator {
-        AuthCoordinator(dependencies: dependencies)
+        let coordinator = AuthCoordinator(dependencies: dependencies)
+        
+        coordinator.onAuthSuccess = { [weak self] in
+            self?.activeFlow = .home
+        }
+        
+        return coordinator
     }
     
     func makeHomeCoordinator() -> HomeCoordinator {
-        HomeCoordinator(dependencies: dependencies)
+        let coordinator = HomeCoordinator(dependencies: dependencies)
+        coordinator.onLogout = { [weak self] in
+            self?.activeFlow = .auth
+        }
+        return coordinator
     }
     
 }

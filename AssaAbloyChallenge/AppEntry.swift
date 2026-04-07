@@ -12,7 +12,7 @@ struct AppEntry: App {
     var body: some Scene {
         WindowGroup {
             RootView()
-                .environmentObject(AppCoordinator(initialRoute: .auth))
+                .environmentObject(AppCoordinator())
         }
     }
 }
