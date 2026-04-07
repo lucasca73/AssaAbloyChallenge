@@ -30,7 +30,9 @@ class AppCoordinator: ObservableObject {
         let coordinator = AuthCoordinator(dependencies: dependencies)
         
         coordinator.onAuthSuccess = { [weak self] in
-            self?.activeFlow = .home
+            Task { @MainActor in
+                self?.activeFlow = .home
+            }
         }
         
         return coordinator
@@ -39,7 +41,9 @@ class AppCoordinator: ObservableObject {
     func makeHomeCoordinator() -> HomeCoordinator {
         let coordinator = HomeCoordinator(dependencies: dependencies)
         coordinator.onLogout = { [weak self] in
-            self?.activeFlow = .auth
+            Task { @MainActor in
+                self?.activeFlow = .auth
+            }
         }
         return coordinator
     }
