@@ -9,11 +9,10 @@ The choosed architecture is MVVM with coordinator.
 - Coordinator organizes the navigation preparing for scalability.
 
 ## 1.1 Prioritized features
-- Authentication (signin and signup)
-Authentication must store a secure key and use it on future request to the API
-The key is stored on Keychain 
+- Authentication (signin and signup).
+Authentication must store a secure key and use it on future request to the API. The key is stored on Keychain 
 
-- Doors List
+- Doors List.
 The list supports pagination and allow user to search by name
 
 ## 1.2 Additional features
@@ -32,3 +31,5 @@ The list supports pagination and allow user to search by name
 
 # 4. Time Records
 20min - Create the project, README, Initial Planning.
+
+60min - Setup project architecture, clean initial project files, implement base navigation
