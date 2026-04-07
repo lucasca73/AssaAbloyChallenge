@@ -31,6 +31,7 @@ final class SignInViewModel: SignInViewModelProtocol {
     }
     
     func login(email: String, password: String) async {
+        loginError = nil
         isLoading = true
         loginService.login(email: email, password: password) { [weak self] result in
             switch result {

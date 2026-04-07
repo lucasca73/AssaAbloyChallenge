@@ -35,3 +35,5 @@ The list supports pagination and allow user to search by name
 60min - Setup project architecture, clean initial project files, implement base navigation
 
 90min - Implement Base UI Components, Auth Navigation, SignIn screen and base NetworkService
+
+10min - Generating SignUp Flow based on SignIn with Claude Agent with minor adjustments.

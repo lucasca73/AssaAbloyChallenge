@@ -28,7 +28,7 @@ struct AuthRouterView: View {
                 case .signin:
                     authCoordinator.makeSignin(router: router)
                 case .signup:
-                    authCoordinator.makeSignUp()
+                    authCoordinator.makeSignUp(router: router)
                 }
             }
         }

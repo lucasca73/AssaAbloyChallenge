@@ -31,7 +31,17 @@ final class AuthCoordinator: Coordinator, ObservableObject {
         return view
     }
     
-    func makeSignUp() -> some View {
-        return SignUpView()
+    func makeSignUp(router: AuthRouter) -> some View {
+        let viewModel = SignUpViewModel(signUpService: dependencies.networkService)
+
+        viewModel.onSignUpSuccess = { [weak self] in
+            self?.onAuthSuccess?()
+        }
+        
+        viewModel.onSignIn = {
+            router.goBack()
+        }
+
+        return SignUpView(viewModel: viewModel)
     }
 }

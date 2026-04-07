@@ -8,7 +8,7 @@
 import SwiftUI
 import Combine
 
-protocol SignInViewModelProtocol: AnyObject, ObservableObject {
+protocol SignInViewModelProtocol: AnyObject {
     var isLoading: Bool { get }
     var loginError: String? { get }
     func signUp()
