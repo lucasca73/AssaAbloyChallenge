@@ -20,12 +20,10 @@ struct HomeRouterView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            homeCoordinator.makeDoorsFeed()
-                .navigationDestination(for: HomeRoutes.self) { route in
-                switch route {
-                case .doorsFeed:
-                    homeCoordinator.makeDoorsFeed()
-                }
+            switch(homeCoordinator.activeTab) {
+            case .feed:
+                DoorsFeedRouterView()
+                    .environmentObject(homeCoordinator.makeFeedCoordinator())
             }
         }
     }

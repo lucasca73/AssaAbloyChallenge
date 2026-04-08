@@ -12,7 +12,7 @@ protocol TemplateViewModelProtocol: AnyObject {}
 
 struct TemplateView<ViewModel: TemplateViewModelProtocol>: View {
     
-    var viewModel: ViewModel
+    @State var viewModel: ViewModel
     
     var body: some View {
         VStack(spacing: 16) {

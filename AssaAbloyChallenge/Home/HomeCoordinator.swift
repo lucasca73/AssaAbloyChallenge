@@ -9,15 +9,23 @@ import SwiftUI
 import Combine
 
 final class HomeCoordinator: Coordinator, ObservableObject {
+    
+    enum ActiveTab: Equatable {
+        case feed
+    }
+    
     let dependencies: AppDependencies
     
     var onLogout: (() -> Void)?
+    
+    @Published var activeTab: ActiveTab = .feed
     
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
     }
     
-    func makeDoorsFeed() -> some View {
-        return DoorsFeedView()
+    func makeFeedCoordinator() -> DoorsFeedCoordinator {
+        let coordinator = DoorsFeedCoordinator(dependencies: dependencies)
+        return coordinator
     }
 }

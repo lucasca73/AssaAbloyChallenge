@@ -16,13 +16,18 @@ final class DoorsFeedCoordinator: Coordinator, ObservableObject {
         self.dependencies = dependencies
     }
 
-    func makeFlowDoorsFeed(router: DoorsFeedRouter) -> some View {
-        let viewModel = DoorsFeedViewModel()
+    func makeFeed(router: DoorsFeedRouter) -> some View {
+        let viewModel = DoorsFeedViewModel(doorsService: dependencies.networkService)
+        
+        viewModel.onDoorSelected = { id in
+            router.navigate(to: .doorDetails(id: id))
+        }
+        
         let view = DoorsFeedView(viewModel: viewModel)
         return view
     }
 
-    func makeAnotherFlowDoorsFeed(router: DoorsFeedRouter) -> some View {
-        Text("Another flow")
+    func makeDoorDetail(router: DoorsFeedRouter, doorId: Int) -> some View {
+        Text("Here it is the door id \(doorId)")
     }
 }

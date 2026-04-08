@@ -8,8 +8,8 @@
 import SwiftUI
 
 enum DoorsFeedRoutes: Hashable {
-    case flowDoorsFeed
-    case anotherFlowDoorsFeed
+    case feed
+    case doorDetails(id: Int)
 }
 
 typealias DoorsFeedRouter = Router<DoorsFeedRoutes>
@@ -21,13 +21,13 @@ struct DoorsFeedRouterView: View {
 
     var body: some View {
         NavigationStack(path: $router.path) {
-            coordinator.makeFlowDoorsFeed(router: router)
+            coordinator.makeFeed(router: router)
                 .navigationDestination(for: DoorsFeedRoutes.self) { route in
                     switch route {
-                    case .flowDoorsFeed:
-                        coordinator.makeFlowDoorsFeed(router: router)
-                    case .anotherFlowDoorsFeed:
-                        coordinator.makeAnotherFlowDoorsFeed(router: router)
+                    case .feed:
+                        coordinator.makeFeed(router: router)
+                    case .doorDetails(let id):
+                        coordinator.makeDoorDetail(router: router, doorId: id)
                     }
                 }
         }

@@ -20,7 +20,7 @@ struct SigninView<ViewModel: SignInViewModelProtocol>: View {
     @State private var email = ""
     @State private var password = ""
     
-    var viewModel: ViewModel
+    @State var viewModel: ViewModel
     
     var body: some View {
         VStack(spacing: 16) {
