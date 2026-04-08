@@ -8,7 +8,7 @@
 import SwiftUI
 
 enum HomeRoutes: Hashable {
-    case home
+    case doorsFeed
 }
 
 typealias HomeRouter = Router<HomeRoutes>
@@ -20,11 +20,11 @@ struct HomeRouterView: View {
     
     var body: some View {
         NavigationStack(path: $router.path) {
-            homeCoordinator.makeHome()
+            homeCoordinator.makeDoorsFeed()
                 .navigationDestination(for: HomeRoutes.self) { route in
                 switch route {
-                case .home:
-                    homeCoordinator.makeHome()
+                case .doorsFeed:
+                    homeCoordinator.makeDoorsFeed()
                 }
             }
         }

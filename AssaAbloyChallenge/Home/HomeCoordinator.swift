@@ -17,7 +17,7 @@ final class HomeCoordinator: Coordinator, ObservableObject {
         self.dependencies = dependencies
     }
     
-    func makeHome() -> some View {
-        return HomeView()
+    func makeDoorsFeed() -> some View {
+        return DoorsFeedView()
     }
 }

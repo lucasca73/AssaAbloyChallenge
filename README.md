@@ -37,3 +37,11 @@ The list supports pagination and allow user to search by name
 90min - Implement Base UI Components, Auth Navigation, SignIn screen and base NetworkService
 
 10min - Generating SignUp Flow based on SignIn with Claude Agent with minor adjustments.
+
+15min - Creating Architecture template for AI use
+
+0min - Implement doors list UI and Navigation
+
+0min - Connect Signin and Signup API
+
+0min - Connect Doors List API
