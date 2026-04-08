@@ -7,8 +7,22 @@
 
 import SwiftUI
 
-struct DoorsFeedView: View {
+protocol DoorsFeedViewModelProtocol: AnyObject {}
+
+struct DoorsFeedView<ViewModel: DoorsFeedViewModelProtocol>: View {
+
+    var viewModel: ViewModel
+
     var body: some View {
-        Text("DoorsFeedView")
+        VStack(spacing: 16) {
+            Text("This is a template")
+        }
+        .padding()
     }
+}
+
+fileprivate final class DoorsFeedMockViewModel: DoorsFeedViewModelProtocol {}
+
+#Preview {
+    DoorsFeedView(viewModel: DoorsFeedMockViewModel())
 }

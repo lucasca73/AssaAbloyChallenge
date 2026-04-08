@@ -22,7 +22,7 @@ final class TemplateCoordinator: Coordinator, ObservableObject {
         return view
     }
     
-    func makeAnotherFlowTemplate(router: AuthRouter) -> some View {
+    func makeAnotherFlowTemplate(router: TemplateRouter) -> some View {
         Text("Another flow")
     }
 }

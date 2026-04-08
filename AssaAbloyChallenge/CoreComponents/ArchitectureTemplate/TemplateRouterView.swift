@@ -12,7 +12,7 @@ enum TemplateRoutes: Hashable {
     case anotherFlowTemplate
 }
 
-typealias TemplateRouter = Router<AuthRoutes>
+typealias TemplateRouter = Router<TemplateRoutes>
 
 
 struct TemplateRouterView: View {
