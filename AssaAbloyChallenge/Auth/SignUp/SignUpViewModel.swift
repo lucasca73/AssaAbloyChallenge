@@ -20,7 +20,9 @@ final class SignUpViewModel: SignUpViewModelProtocol {
     // MARK: View
     var isLoading: Bool = false
     var signUpError: String? = nil
-
+    var fieldErrors: [SignUpFields : String] = [:]
+    
+    
     init(signUpService: SignUpService) {
         self.signUpService = signUpService
     }
@@ -33,7 +35,18 @@ final class SignUpViewModel: SignUpViewModelProtocol {
             case .success:
                 self?.onSignUpSuccess?()
             case .failure(let error):
-                self?.signUpError = error.localizedDescription
+                if error.fieldErrors.isEmpty {
+                    self?.fieldErrors = [:]
+                    self?.signUpError = error.description
+                } else {
+                    var newFieldErrors = [SignUpFields: String]()
+                    error.fieldErrors.forEach { fieldError in
+                        if let field = SignUpFields(rawValue: fieldError.field) {
+                            newFieldErrors[field] = fieldError.message
+                        }
+                    }
+                    self?.fieldErrors = newFieldErrors
+                }
             }
             self?.isLoading = false
         }

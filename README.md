@@ -41,5 +41,5 @@ The list supports pagination and allow user to search by name
 | 210min | 15min | Creating Template prompt for agents to use to scaffold new features. Creating Doors Feed scafoold. | 
 | 300min | 90min | Implement doors list UI, Navigation, Base API Service. | 
 | 420min | 120min | Setup Network layer and Environment | 
-| 420min | 0min | Connect Signin and Signup API, store token on keychain. | 
+| 450min | 30min | Connect API, implementing error handling on Form Fields | 
 | 420min | 0min | Connect Doors List API. | 

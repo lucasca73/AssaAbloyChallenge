@@ -13,7 +13,7 @@ struct NameField: View {
     var error: String? = nil
     
     var body: some View {
-        HStack {
+        VStack {
             TextField(title, text: $name)
                 .frame(maxWidth: .infinity)
                 .keyboardType(.namePhonePad)
@@ -24,6 +24,7 @@ struct NameField: View {
                 .background(Color.gray.opacity(0.15))
                 .cornerRadius(8)
             ErrorText(error: error)
+                .padding(.leading)
         }
     }
 }

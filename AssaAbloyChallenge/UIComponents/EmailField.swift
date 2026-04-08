@@ -13,7 +13,7 @@ struct EmailField: View {
     var error: String? = nil
     
     var body: some View {
-        HStack {
+        VStack {
             TextField(title, text: $email)
                 .frame(maxWidth: .infinity)
                 .keyboardType(.emailAddress)
@@ -24,6 +24,7 @@ struct EmailField: View {
                 .background(Color.gray.opacity(0.15))
                 .cornerRadius(8)
             ErrorText(error: error)
+                .padding(.leading)
         }
     }
 }

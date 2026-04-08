@@ -8,11 +8,14 @@
 import SwiftUI
 
 struct ErrorText: View {
-    @State var error: String?
+    var error: String?
     var body: some View {
         if let error = error {
-            Text(error).foregroundColor(.red)
-                .frame(maxWidth: .infinity)
+            Text(error)
+                .foregroundColor(.red)
+                .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.footnote)
+                .padding(.bottom, 8)
         } else {
             EmptyView()
         }

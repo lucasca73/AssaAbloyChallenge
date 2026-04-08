@@ -10,11 +10,12 @@ import SwiftUI
 protocol SignUpViewModelProtocol: AnyObject {
     var isLoading: Bool { get }
     var signUpError: String? { get }
+    var fieldErrors: [SignUpFields: String] { get }
     func signUp(firstName: String, lastName: String, email: String, password: String)
     func backToSignIn()
 }
 
-fileprivate enum SignUpFields: Hashable {
+enum SignUpFields: String, Hashable {
     case firstName, lastName, email, password
 }
 
@@ -31,20 +32,20 @@ struct SignUpView<ViewModel: SignUpViewModelProtocol>: View {
 
     var body: some View {
         ScrollView() {
-            Spacer()
-            NameField(title: "First Name", name: $firstName)
+            Spacer(minLength: 128)
+            NameField(title: "First Name", name: $firstName, error: viewModel.fieldErrors[.firstName])
                 .focused($focusedField, equals: .firstName)
                 .onSubmit { focusedField = .lastName }
             
-            NameField(title: "Last Name", name: $lastName)
+            NameField(title: "Last Name", name: $lastName, error: viewModel.fieldErrors[.lastName])
                 .focused($focusedField, equals: .lastName)
                 .onSubmit { focusedField = .email }
             
-            EmailField(title: "Email", email: $email)
+            EmailField(title: "Email", email: $email, error: viewModel.fieldErrors[.email])
                 .focused($focusedField, equals: .email)
                 .onSubmit { focusedField = .password }
             
-            PasswordField(title: "Password", password: $password)
+            PasswordField(title: "Password", password: $password, error: viewModel.fieldErrors[.password])
                 .focused($focusedField, equals: .password)
                 .onSubmit { submit() }
             
@@ -75,6 +76,7 @@ struct SignUpView<ViewModel: SignUpViewModelProtocol>: View {
 }
 
 fileprivate final class MockViewModel: SignUpViewModelProtocol {
+    let fieldErrors: [SignUpFields : String] = [.password: "Something gone wrong"]
     var isLoading: Bool = false
     var signUpError: String? = nil
     func signUp(firstName: String, lastName: String, email: String, password: String) {
