@@ -22,7 +22,7 @@ class AppCoordinator: ObservableObject {
     init(initialRoute: AppFlow = .auth) {
         // Setup dependencies
         dependencies = AppDependencies()
-        activeFlow = initialRoute
+        activeFlow = dependencies.networkService.isAuthenticated ? .home : .auth
     }
     
     func makeAuthCoordinator() -> AuthCoordinator {

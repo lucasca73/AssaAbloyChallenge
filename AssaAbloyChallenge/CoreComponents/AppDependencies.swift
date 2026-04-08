@@ -12,7 +12,7 @@ class AppDependencies {
     var networkService: NetworkService
     var appConfig: AppConfig
     
-    init(networkService: NetworkService = MockNetworkService(), appConfig: AppConfig = .current) {
+    init(networkService: NetworkService = NetworkClient(), appConfig: AppConfig = .current) {
         self.networkService = networkService
         self.appConfig = appConfig
     }

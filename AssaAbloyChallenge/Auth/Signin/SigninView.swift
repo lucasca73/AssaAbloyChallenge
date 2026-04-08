@@ -52,6 +52,7 @@ struct SigninView<ViewModel: SignInViewModelProtocol>: View {
             }
             
             ErrorText(error: viewModel.loginError)
+                .padding(.leading)
             
             PrimaryButton(title: "Login") {
                 submit()

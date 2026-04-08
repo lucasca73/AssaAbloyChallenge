@@ -7,11 +7,15 @@
 
 import Foundation
 
-class MockNetworkService: NetworkService {}
+class MockNetworkService: NetworkService {
+    var isAuthenticated: Bool = false
+    
+}
 
 extension MockNetworkService: LoginService {
     func login(email: String, password: String, completion: @escaping (Result<LoginResponse, LoginError>) -> Void) {
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) { [weak self] in
+            self?.isAuthenticated = true
             completion(.success(LoginResponse(token: "123ThisIsFake")))
         }
     }

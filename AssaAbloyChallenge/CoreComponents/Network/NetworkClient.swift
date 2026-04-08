@@ -10,12 +10,19 @@ import Foundation
 protocol NetworkService: LoginService, SignUpService, DoorsFetchService { }
 
 class NetworkClient: NetworkService {
+    
     private let session: URLSession
     private let decoder: JSONDecoder
+    private let keychainManager: KeychainManager
+    
+    var isAuthenticated: Bool {
+        (try? keychainManager.read(for: KeychainKey.accessToken)) != nil
+    }
 
-    init(session: URLSession = .shared, decoder: JSONDecoder = JSONDecoder()) {
+    init(keychainManager: KeychainManager = KeychainManager(), session: URLSession = .shared, decoder: JSONDecoder = JSONDecoder()) {
         self.session = session
         self.decoder = decoder
+        self.keychainManager = keychainManager
     }
 
     func request<T: Decodable, E: Decodable>(_ endpoint: Endpoint) async throws -> Result<T, E> {
@@ -44,13 +51,16 @@ class NetworkClient: NetworkService {
 }
 
 extension NetworkClient: LoginService {
+    
     func login(email: String, password: String, completion: @escaping (Result<LoginResponse, LoginError>) -> Void) {
-        Task {
+        Task { [weak self] in
+            guard let self else { return }
             do {
                 let result: Result<LoginResponse, LoginError> = try await self.request(AuthEndpoint.login(email: email, password: password))
                 switch result {
-                case .success(let token):
-                    completion(.success(token))
+                case .success(let response):
+                    try self.keychainManager.save(response.token, for: KeychainKey.accessToken)
+                    completion(.success(response))
                 case .failure(let error):
                     completion(.failure(error))
                 }

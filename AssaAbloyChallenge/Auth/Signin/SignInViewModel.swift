@@ -39,7 +39,7 @@ final class SignInViewModel: SignInViewModelProtocol {
                 self?.onLoginSuccess?()
                 
             case .failure(let error):
-                self?.loginError = error.localizedDescription
+                self?.loginError = error.description
             }
             self?.isLoading = false
         }

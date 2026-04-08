@@ -12,6 +12,7 @@ protocol NetworkServiceProtocol {
 }
 
 protocol LoginService {
+    var isAuthenticated: Bool { get }
     func login(email: String, password: String, completion: @escaping (Result<LoginResponse, LoginError>) -> Void)
 }
 
