@@ -31,6 +31,6 @@ struct AuthRouterView: View {
                     authCoordinator.makeSignUp(router: router)
                 }
             }
-        }
+        }.toast($authCoordinator.toast)
     }
 }

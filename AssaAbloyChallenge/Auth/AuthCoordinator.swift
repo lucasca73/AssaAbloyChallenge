@@ -12,6 +12,8 @@ final class AuthCoordinator: Coordinator, ObservableObject {
     let dependencies: AppDependencies
     var onAuthSuccess: (() -> Void)?
     
+    @Published var toast: Toast?
+    
     init(dependencies: AppDependencies) {
         self.dependencies = dependencies
     }
@@ -35,11 +37,16 @@ final class AuthCoordinator: Coordinator, ObservableObject {
         let viewModel = SignUpViewModel(signUpService: dependencies.networkService)
 
         viewModel.onSignUpSuccess = { [weak self] in
-            self?.onAuthSuccess?()
+            Task { @MainActor in
+                router.goBack()
+                self?.toast = Toast(message: "Succesfully created user", style: .success)
+            }
         }
         
         viewModel.onSignIn = {
-            router.goBack()
+            Task { @MainActor in
+                router.goBack()
+            }
         }
 
         return SignUpView(viewModel: viewModel)
