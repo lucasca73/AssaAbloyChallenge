@@ -30,18 +30,16 @@ The list supports pagination and allow user to search by name
 
 
 # 4. Time Records
-20min - Create the project, README, Initial Planning.
 
-60min - Setup project architecture, clean initial project files, implement base navigation
-
-90min - Implement Base UI Components, Auth Navigation, SignIn screen and base NetworkService
-
-10min - Generating SignUp Flow based on SignIn with Claude Agent with minor adjustments.
-
-15min - Creating Architecture template for AI use
-
-0min - Implement doors list UI and Navigation
-
-0min - Connect Signin and Signup API
-
-0min - Connect Doors List API
+| Partial | duration | task |
+|-|-|-|
+| 20min | 20min | Create the project, README, Initial Planning. | 
+| 80min | 60min | Setup project architecture, clean initial project files, implement base navigation. | 
+| 170min | 90min | Implement Base UI Components, Auth Navigation, SignIn screen and base NetworkService. | 
+| 180min | 10min | Generating SignUp Flow based on SignIn with Claude Agent with minor adjustments. | 
+| 195min | 15min | Creating Architecture template for AI use. | 
+| 210min | 15min | Creating Template prompt for agents to use to scaffold new features. Creating Doors Feed scafoold. | 
+| 300min | 90min | Implement doors list UI, Navigation, Base API Service. | 
+| 420min | 120min | Setup Network layer and Environment | 
+| 420min | 0min | Connect Signin and Signup API, store token on keychain. | 
+| 420min | 0min | Connect Doors List API. | 

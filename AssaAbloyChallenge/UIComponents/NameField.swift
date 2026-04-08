@@ -1,5 +1,5 @@
 //
-//  PasswordField.swift
+//  EmailField.swift
 //  AssaAbloyChallenge
 //
 //  Created by Lucas Costa Araujo on 07/04/26.
@@ -7,16 +7,19 @@
 
 import SwiftUI
 
-struct PasswordField: View {
-    var title: String
-    @Binding var password: String
+struct NameField: View {
+    let title: String
+    @Binding var name: String
     var error: String? = nil
     
     var body: some View {
         HStack {
-            SecureField(title, text: $password)
+            TextField(title, text: $name)
                 .frame(maxWidth: .infinity)
-                .textContentType(.password)
+                .keyboardType(.namePhonePad)
+                .textContentType(.name)
+                .textInputAutocapitalization(.words)
+                .autocorrectionDisabled()
                 .padding()
                 .background(Color.gray.opacity(0.15))
                 .cornerRadius(8)
@@ -26,5 +29,5 @@ struct PasswordField: View {
 }
 
 #Preview {
-    PasswordField(title: "Password", password: Binding.constant("123123"))
+    NameField(title: "Name", name: Binding.constant("Jorge Washington"))
 }

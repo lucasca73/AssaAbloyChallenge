@@ -10,16 +10,21 @@ import SwiftUI
 struct EmailField: View {
     let title: String
     @Binding var email: String
+    var error: String? = nil
     
     var body: some View {
-        TextField(title, text: $email)
-            .keyboardType(.emailAddress)
-            .textContentType(.emailAddress)
-            .textInputAutocapitalization(.never)
-            .autocorrectionDisabled()
-            .padding()
-            .background(Color.gray.opacity(0.15))
-            .cornerRadius(8)
+        HStack {
+            TextField(title, text: $email)
+                .frame(maxWidth: .infinity)
+                .keyboardType(.emailAddress)
+                .textContentType(.emailAddress)
+                .textInputAutocapitalization(.never)
+                .autocorrectionDisabled()
+                .padding()
+                .background(Color.gray.opacity(0.15))
+                .cornerRadius(8)
+            ErrorText(error: error)
+        }
     }
 }
 

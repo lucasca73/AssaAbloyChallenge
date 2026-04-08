@@ -25,15 +25,10 @@ final class SignUpViewModel: SignUpViewModelProtocol {
         self.signUpService = signUpService
     }
 
-    func signUp(email: String, password: String, confirmPassword: String) async {
-        guard password == confirmPassword else {
-            signUpError = "Passwords do not match"
-            return
-        }
-
+    func signUp(firstName: String, lastName: String, email: String, password: String) {
         signUpError = nil
         isLoading = true
-        signUpService.signUp(email: email, password: password) { [weak self] result in
+        signUpService.signUp(firstName: firstName, lastName: lastName, email: email, password: password) { [weak self] result in
             switch result {
             case .success:
                 self?.onSignUpSuccess?()

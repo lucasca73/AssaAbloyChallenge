@@ -19,7 +19,6 @@ class AppCoordinator: ObservableObject {
     
     @Published var activeFlow: AppFlow
     
-    
     init(initialRoute: AppFlow = .auth) {
         // Setup dependencies
         dependencies = AppDependencies()

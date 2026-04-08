@@ -12,7 +12,12 @@ protocol SignInViewModelProtocol: AnyObject {
     var isLoading: Bool { get }
     var loginError: String? { get }
     func signUp()
-    func login(email: String, password: String) async
+    func login(email: String, password: String)
+}
+
+fileprivate enum SignInFields: Hashable {
+    case email
+    case password
 }
 
 struct SigninView<ViewModel: SignInViewModelProtocol>: View {
@@ -22,33 +27,47 @@ struct SigninView<ViewModel: SignInViewModelProtocol>: View {
     
     @State var viewModel: ViewModel
     
+    @FocusState private var focusedField: SignInFields?
+    
     var body: some View {
         VStack(spacing: 16) {
             Spacer()
             EmailField(title: "Email", email: $email)
+                .focused($focusedField, equals: .email)
+                .onSubmit {
+                    focusedField = .password
+                }
             PasswordField(title: "Password", password: $password)
+                .focused($focusedField, equals: .password)
+                .onSubmit {
+                    if !email.isEmpty {
+                        submit()
+                    } else {
+                        focusedField = .email
+                    }
+                }
             
             if viewModel.isLoading {
                 ProgressView()
             }
             
-            if let errorMessage = viewModel.loginError, !errorMessage.isEmpty {
-                Text(errorMessage).foregroundStyle(.red)
-            }
+            ErrorText(error: viewModel.loginError)
             
             PrimaryButton(title: "Login") {
-                Task {
-                    await viewModel.login(email: email, password: password)
-                }
+                submit()
             }
             
             SecondaryButton(title: "Sign Up") {
                 viewModel.signUp()
             }
             Spacer()
-            Text("Challange by Lucas Costa Araújo")
+            Text("Challange made by Lucas Costa Araújo")
         }
         .padding()
+    }
+    
+    func submit() {
+        viewModel.login(email: email, password: password)
     }
 }
 

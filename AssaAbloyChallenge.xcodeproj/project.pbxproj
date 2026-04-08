@@ -6,6 +6,12 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		4B4957422F86EA4000ADE841 /* Config.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4B4957412F86EA4000ADE841 /* Config.plist */; };
+		4B4957432F86EDFF00ADE841 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4B4956CE2F86E57000ADE841 /* Release.xcconfig */; };
+		4B4957442F86EDFF00ADE841 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4B4956CD2F86E57000ADE841 /* Debug.xcconfig */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		4BD549CC2F8532AC00AAA48E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -24,14 +30,30 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		4B4956CD2F86E57000ADE841 /* Debug.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		4B4956CE2F86E57000ADE841 /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		4B4957412F86EA4000ADE841 /* Config.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Config.plist; sourceTree = "<group>"; };
 		4BD549BC2F8532AB00AAA48E /* AssaAbloyChallenge.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AssaAbloyChallenge.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD549CB2F8532AC00AAA48E /* AssaAbloyChallengeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssaAbloyChallengeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BD549D52F8532AC00AAA48E /* AssaAbloyChallengeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AssaAbloyChallengeUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4B4957462F86F5E800ADE841 /* Exceptions for "AssaAbloyChallenge" folder in "AssaAbloyChallenge" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4BD549BB2F8532AB00AAA48E /* AssaAbloyChallenge */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4BD549BE2F8532AB00AAA48E /* AssaAbloyChallenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4B4957462F86F5E800ADE841 /* Exceptions for "AssaAbloyChallenge" folder in "AssaAbloyChallenge" target */,
+			);
 			path = AssaAbloyChallenge;
 			sourceTree = "<group>";
 		};
@@ -72,6 +94,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4B4956CF2F86E57000ADE841 /* configurations */ = {
+			isa = PBXGroup;
+			children = (
+				4B4957412F86EA4000ADE841 /* Config.plist */,
+				4B4956CD2F86E57000ADE841 /* Debug.xcconfig */,
+				4B4956CE2F86E57000ADE841 /* Release.xcconfig */,
+			);
+			path = configurations;
+			sourceTree = "<group>";
+		};
 		4BD549B32F8532AB00AAA48E = {
 			isa = PBXGroup;
 			children = (
@@ -79,6 +111,7 @@
 				4BD549CE2F8532AC00AAA48E /* AssaAbloyChallengeTests */,
 				4BD549D82F8532AC00AAA48E /* AssaAbloyChallengeUITests */,
 				4BD549BD2F8532AB00AAA48E /* Products */,
+				4B4956CF2F86E57000ADE841 /* configurations */,
 			);
 			sourceTree = "<group>";
 		};
@@ -212,6 +245,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4B4957432F86EDFF00ADE841 /* Release.xcconfig in Resources */,
+				4B4957442F86EDFF00ADE841 /* Debug.xcconfig in Resources */,
+				4B4957422F86EA4000ADE841 /* Config.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -271,6 +307,7 @@
 /* Begin XCBuildConfiguration section */
 		4BD549DD2F8532AC00AAA48E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B4956CD2F86E57000ADE841 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -325,6 +362,7 @@
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -332,6 +370,7 @@
 		};
 		4BD549DE2F8532AC00AAA48E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4B4956CE2F86E57000ADE841 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -379,6 +418,7 @@
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -394,6 +434,7 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AssaAbloyChallenge/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
@@ -407,7 +448,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devcostaluc.AssaAbloyChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -422,7 +462,6 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 26.4;
 			};
 			name = Debug;
 		};
@@ -437,8 +476,10 @@
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SELECTED_FILES = readonly;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = AssaAbloyChallenge/Info.plist;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSceneManifest_Generation[sdk=iphonesimulator*]" = YES;
+				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphoneos*]" = YES;
 				"INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents[sdk=iphonesimulator*]" = YES;
 				"INFOPLIST_KEY_UILaunchScreen_Generation[sdk=iphoneos*]" = YES;
@@ -450,7 +491,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 26.4;
 				LD_RUNPATH_SEARCH_PATHS = "@executable_path/Frameworks";
 				"LD_RUNPATH_SEARCH_PATHS[sdk=macosx*]" = "@executable_path/../Frameworks";
-				MACOSX_DEPLOYMENT_TARGET = 26.3;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.devcostaluc.AssaAbloyChallenge;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -465,7 +505,6 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
-				XROS_DEPLOYMENT_TARGET = 26.4;
 			};
 			name = Release;
 		};
@@ -577,7 +616,7 @@
 				4BD549DE2F8532AC00AAA48E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4BD549DF2F8532AC00AAA48E /* Build configuration list for PBXNativeTarget "AssaAbloyChallenge" */ = {
 			isa = XCConfigurationList;
@@ -586,7 +625,7 @@
 				4BD549E12F8532AC00AAA48E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4BD549E22F8532AC00AAA48E /* Build configuration list for PBXNativeTarget "AssaAbloyChallengeTests" */ = {
 			isa = XCConfigurationList;
@@ -595,7 +634,7 @@
 				4BD549E42F8532AC00AAA48E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		4BD549E52F8532AC00AAA48E /* Build configuration list for PBXNativeTarget "AssaAbloyChallengeUITests" */ = {
 			isa = XCConfigurationList;
@@ -604,7 +643,7 @@
 				4BD549E72F8532AC00AAA48E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
