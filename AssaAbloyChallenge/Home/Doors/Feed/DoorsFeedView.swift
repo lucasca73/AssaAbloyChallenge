@@ -15,12 +15,14 @@ struct DoorDisplayModel: Identifiable {
 
 protocol DoorsFeedViewModelProtocol: AnyObject, Observable {
     var isLoading: Bool { get }
+    var isLoadingMore: Bool { get }
     var errorMessage: String? { get }
     var doors: [DoorDisplayModel] { get }
     var filteredDoors: [DoorDisplayModel] { get }
     var searchText: String { get set }
     func selectedDoor(doorId: Int)
     func viewAppeared()
+    func loadMoreIfNeeded(currentDoor: DoorDisplayModel)
 }
 
 struct DoorsFeedView<ViewModel: DoorsFeedViewModelProtocol>: View {
@@ -33,9 +35,22 @@ struct DoorsFeedView<ViewModel: DoorsFeedViewModelProtocol>: View {
         } else if let error = viewModel.errorMessage, !error.isEmpty {
             Text(error).foregroundStyle(Color.red)
         } else {
-            List(viewModel.filteredDoors) { door in
-                DoorItemView(id: door.id, title: door.title, subtitle: door.subtitle) { id in
-                    viewModel.selectedDoor(doorId: id)
+            List {
+                ForEach(viewModel.filteredDoors) { door in
+                    DoorItemView(id: door.id, title: door.title, subtitle: door.subtitle) { id in
+                        viewModel.selectedDoor(doorId: id)
+                    }
+                    .onAppear {
+                        viewModel.loadMoreIfNeeded(currentDoor: door)
+                    }
+                }
+                if viewModel.isLoadingMore {
+                    HStack {
+                        Spacer()
+                        ProgressView()
+                        Spacer()
+                    }
+                    .listRowSeparator(.hidden)
                 }
             }
             .searchable(text: Binding(
@@ -51,6 +66,7 @@ struct DoorsFeedView<ViewModel: DoorsFeedViewModelProtocol>: View {
 
 @Observable fileprivate final class DoorsFeedMockViewModel: DoorsFeedViewModelProtocol {
     var isLoading: Bool = false
+    var isLoadingMore: Bool = false
     var errorMessage: String? = nil
     var searchText: String = ""
     var doors: [DoorDisplayModel] = [
@@ -65,6 +81,7 @@ struct DoorsFeedView<ViewModel: DoorsFeedViewModelProtocol>: View {
 
     func selectedDoor(doorId: Int) { debugPrint("Selected door with id: \(doorId)") }
     func viewAppeared() {}
+    func loadMoreIfNeeded(currentDoor: DoorDisplayModel) {}
 }
 
 #Preview {

@@ -18,11 +18,14 @@ final class DoorsFeedViewModel: DoorsFeedViewModelProtocol {
     
     // MARK: View
     var isLoading: Bool = false
+    var isLoadingMore: Bool = false
     var errorMessage: String? = nil
     var doors: [DoorDisplayModel] = []
     var searchText: String = ""
-    var pagination: Int = 0
-    var size: Int = 0
+
+    private var currentPage: Int = 0
+    private var isLastPage: Bool = false
+    private let pageSize: Int = 20
 
     var filteredDoors: [DoorDisplayModel] {
         guard !searchText.isEmpty else { return doors }
@@ -40,20 +43,44 @@ final class DoorsFeedViewModel: DoorsFeedViewModelProtocol {
     
     func viewAppeared() {
         guard doors.isEmpty else { return }
-        
-        isLoading = true
+        fetchPage(0)
+    }
+
+    func loadMoreIfNeeded(currentDoor: DoorDisplayModel) {
+        guard !isLoadingMore, !isLastPage, searchText.isEmpty else { return }
+        guard currentDoor.id == doors.last?.id else { return }
+        fetchPage(currentPage + 1)
+    }
+
+    private func fetchPage(_ page: Int) {
+        let isFirstPage = page == 0
+        if isFirstPage {
+            isLoading = true
+        } else {
+            isLoadingMore = true
+        }
         errorMessage = nil
         
-        doorsService.fetchDoors(page: 0, size: 20) { [weak self] result in
+        doorsService.fetchDoors(page: page, size: pageSize) { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let doorsResponse):
-                self.doors = doorsResponse.content.map(self.displayModel)
+            case .success(let response):
+                let newDoors = response.content.map(self.displayModel)
+                if isFirstPage {
+                    self.doors = newDoors
+                } else {
+                    self.doors += newDoors
+                }
+                self.currentPage = page
+                self.isLastPage = response.last
             case .failure:
-                self.errorMessage = "Failed fetching doors. Please try again."
-                break
+                if isFirstPage { self.errorMessage = "Failed fetching doors. Please try again." }
             }
-            self.isLoading = false
+            if isFirstPage {
+                self.isLoading = false
+            } else {
+                self.isLoadingMore = false
+            }
         }
     }
     
