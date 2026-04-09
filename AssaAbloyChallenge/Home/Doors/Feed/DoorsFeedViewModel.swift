@@ -20,8 +20,14 @@ final class DoorsFeedViewModel: DoorsFeedViewModelProtocol {
     var isLoading: Bool = false
     var errorMessage: String? = nil
     var doors: [DoorDisplayModel] = []
+    var searchText: String = ""
     var pagination: Int = 0
     var size: Int = 0
+
+    var filteredDoors: [DoorDisplayModel] {
+        guard !searchText.isEmpty else { return doors }
+        return doors.filter { $0.title.localizedCaseInsensitiveContains(searchText) }
+    }
     
     
     init(doorsService: DoorsFetchService) {

@@ -39,7 +39,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4B4957462F86F5E800ADE841 /* Exceptions for "AssaAbloyChallenge" folder in "AssaAbloyChallenge" target */ = {
+		4B36A4422F87440100FDE5C8 /* Exceptions for "AssaAbloyChallenge" folder in "AssaAbloyChallenge" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -52,7 +52,7 @@
 		4BD549BE2F8532AB00AAA48E /* AssaAbloyChallenge */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				4B4957462F86F5E800ADE841 /* Exceptions for "AssaAbloyChallenge" folder in "AssaAbloyChallenge" target */,
+				4B36A4422F87440100FDE5C8 /* Exceptions for "AssaAbloyChallenge" folder in "AssaAbloyChallenge" target */,
 			);
 			path = AssaAbloyChallenge;
 			sourceTree = "<group>";
