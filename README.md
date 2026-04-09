@@ -7,9 +7,7 @@ I choose the main goal to be a well develop foundation of the app. Some componen
 
 [Time Records](#time-records) section reports the duration of each task executed in this project.
 
-Latest demo
-
-<img src="https://github.com/user-attachments/assets/64da33ab-9ce1-4437-bdae-16dccc08717e" width="500">
+<img src="https://github.com/user-attachments/assets/383f0b63-67d4-4228-aaca-f650b204a2f4" width="280" alt="Latest demo">
 
 # 1. Planning
 
