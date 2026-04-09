@@ -33,6 +33,7 @@ enum AuthEndpoint: Endpoint {
         }
     }
     
+    var authNeeded: Bool { false }
     var headers: [String : String]? { nil }
     var queryItems: [URLQueryItem]? { nil }
 }

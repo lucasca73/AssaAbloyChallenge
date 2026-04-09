@@ -30,16 +30,12 @@ extension MockNetworkService: SignUpService {
 }
 
 extension MockNetworkService: DoorsFetchService {
-    func fetchDoors(completion: @escaping (Result<[DoorModel], any Error>) -> Void) {
+    func fetchDoors(page: Int, size: Int, completion: @escaping (Result<DoorsListResponse, DoorsError>) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
             
-            let doors = [
-                DoorModel(id: 1, isOpen: true, name: "Door 1", lastOpened: .now, lastClosed: .now - 100000),
-                DoorModel(id: 2, isOpen: true, name: "Backyard Door", lastOpened: .now, lastClosed: .now - 200000),
-                DoorModel(id: 3, isOpen: false, name: "Frontdoor", lastOpened: .now - 300000, lastClosed: .now)
-            ]
+            let doors = [Door(id: 1, name: "Door", serial: "", lockMac: "", battery: 99, address: "", longitude: 0.00, latitude: 0.00)]
             
-            completion(.success(doors))
+            completion(.success(DoorsListResponse(content: doors, page: 0, size: 5, totalElements: 1, totalPages: 1, last: true)))
         }
     }
 }

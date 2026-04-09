@@ -15,6 +15,8 @@ class NetworkClient: NetworkService {
     private let decoder: JSONDecoder
     private let keychainManager: KeychainManager
     
+    var forcedLogoutCallback: (() -> Void)?
+    
     var isAuthenticated: Bool {
         (try? keychainManager.read(for: KeychainKey.accessToken)) != nil
     }
@@ -24,18 +26,39 @@ class NetworkClient: NetworkService {
         self.decoder = decoder
         self.keychainManager = keychainManager
     }
+    
+    func logout() {
+        Task { @MainActor [weak self] in
+            try? self?.keychainManager.delete(for: KeychainKey.accessToken)
+        }
+    }
+    
+    func forceLogout() {
+        logout()
+        forcedLogoutCallback?()
+    }
 
     func request<T: Decodable, E: Decodable>(_ endpoint: Endpoint) async throws -> Result<T, E> {
-        let request = try endpoint.urlRequest()
-
+        let request: URLRequest
+        
+        if endpoint.authNeeded {
+            let token = try? keychainManager.read(for: KeychainKey.accessToken)
+            request = try endpoint.urlRequest(token: token)
+        } else {
+            request = try endpoint.urlRequest()
+        }
+    
         let (data, response) = try await session.data(for: request)
-
+        
         guard let httpResponse = response as? HTTPURLResponse else {
             throw NetworkError.invalidResponse
         }
 
         guard (200...299).contains(httpResponse.statusCode) else {
             do {
+                if httpResponse.statusCode == 401 {
+                    self.forceLogout()
+                }
                 return .failure(try decoder.decode(E.self, from: data))
             } catch {
                 throw NetworkError.decoding(error)
@@ -45,6 +68,7 @@ class NetworkClient: NetworkService {
         do {
             return .success(try decoder.decode(T.self, from: data))
         } catch {
+            debugPrint("failed to decode: \(String(describing: String(data: data, encoding: .utf8)))")
             throw NetworkError.decoding(error)
         }
     }
@@ -90,9 +114,19 @@ extension NetworkClient: SignUpService {
 }
 
 extension NetworkClient: DoorsFetchService {
-    func fetchDoors(completion: @escaping (Result<[DoorModel], any Error>) -> Void) {
+    func fetchDoors(page: Int, size: Int, completion: @escaping (Result<DoorsListResponse, DoorsError>) -> Void) {
         Task {
-            
+            do {
+                let result: Result<DoorsListResponse, DoorsError> = try await self.request(DoorsEndpoint.list(page: page, size: size))
+                switch result {
+                case .success(let response):
+                    completion(.success(response))
+                case .failure(let error):
+                    completion(.failure(error))
+                }
+            } catch {
+                completion(.failure(DoorsError.standardError))
+            }
         }
     }
 }

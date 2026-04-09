@@ -20,6 +20,8 @@ final class DoorsFeedViewModel: DoorsFeedViewModelProtocol {
     var isLoading: Bool = false
     var errorMessage: String? = nil
     var doors: [DoorDisplayModel] = []
+    var pagination: Int = 0
+    var size: Int = 0
     
     
     init(doorsService: DoorsFetchService) {
@@ -36,11 +38,11 @@ final class DoorsFeedViewModel: DoorsFeedViewModelProtocol {
         isLoading = true
         errorMessage = nil
         
-        doorsService.fetchDoors { [weak self] result in
+        doorsService.fetchDoors(page: 0, size: 20) { [weak self] result in
             guard let self else { return }
             switch result {
-            case .success(let doors):
-                self.doors = doors.map(self.displayModel)
+            case .success(let doorsResponse):
+                self.doors = doorsResponse.content.map(self.displayModel)
             case .failure:
                 self.errorMessage = "Failed fetching doors. Please try again."
                 break
@@ -49,8 +51,8 @@ final class DoorsFeedViewModel: DoorsFeedViewModelProtocol {
         }
     }
     
-    func displayModel(_ door: DoorModel) -> DoorDisplayModel {
-        let subtitle = door.isOpen ? "last closed at \(door.lastClosed?.description ?? "-:-")" : "last opened at \(door.lastOpened?.description ?? "-:-")"
+    func displayModel(_ door: Door) -> DoorDisplayModel {
+        let subtitle = "Battery Level: \(door.battery)% \n\(door.address)"
         return .init(id: door.id, title: door.name, subtitle: subtitle)
     }
 }

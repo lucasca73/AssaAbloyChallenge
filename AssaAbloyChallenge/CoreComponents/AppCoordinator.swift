@@ -21,8 +21,14 @@ class AppCoordinator: ObservableObject {
     
     init(initialRoute: AppFlow = .auth) {
         // Setup dependencies
-        dependencies = AppDependencies()
+        let client = NetworkClient()
+        
+        dependencies = AppDependencies(networkService: client)
         activeFlow = dependencies.networkService.isAuthenticated ? .home : .auth
+        
+        client.forcedLogoutCallback = { [weak self] in
+            self?.activeFlow = .auth
+        }
     }
     
     func makeAuthCoordinator() -> AuthCoordinator {

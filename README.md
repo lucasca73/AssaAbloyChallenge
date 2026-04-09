@@ -44,4 +44,4 @@ The list supports pagination and allow user to search by name
 | 450min | 30min | Connect API, implementing error handling on Form Fields | 
 | 480min | 30min | Creating toast feedback | 
 | 500min | 20min | Generating KeychainManager from Claude and Storing Login token on keychain | 
-| 500min | 0min | Connecting doors fetch | 
+| 530min | 30min | Connecting doors fetch | 

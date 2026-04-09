@@ -21,5 +21,5 @@ protocol SignUpService {
 }
 
 protocol DoorsFetchService {
-    func fetchDoors(completion: @escaping (Result<[DoorModel], Error>) -> Void)
+    func fetchDoors(page: Int, size: Int, completion: @escaping (Result<DoorsListResponse, DoorsError>) -> Void)
 }
