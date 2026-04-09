@@ -7,24 +7,22 @@
 
 import SwiftUI
 
-enum HomeRoutes: Hashable {
-    case doorsFeed
-}
-
-typealias HomeRouter = Router<HomeRoutes>
 
 struct HomeRouterView: View {
-    
-    @StateObject var router = HomeRouter()
+
     @EnvironmentObject var homeCoordinator: HomeCoordinator
-    
+
     var body: some View {
-        NavigationStack(path: $router.path) {
-            switch(homeCoordinator.activeTab) {
-            case .feed:
-                DoorsFeedRouterView()
-                    .environmentObject(homeCoordinator.makeFeedCoordinator())
-            }
+        TabView(selection: $homeCoordinator.activeTab) {
+            DoorsFeedRouterView()
+                .environmentObject(homeCoordinator.makeFeedCoordinator())
+                .tabItem { Label("Doors", systemImage: "door.left.hand.closed") }
+                .tag(HomeCoordinator.ActiveTab.feed)
+
+            SettingsRouterView()
+                .environmentObject(homeCoordinator.makeSettingsCoordinator())
+                .tabItem { Label("Settings", systemImage: "gearshape") }
+                .tag(HomeCoordinator.ActiveTab.settings)
         }
     }
 }

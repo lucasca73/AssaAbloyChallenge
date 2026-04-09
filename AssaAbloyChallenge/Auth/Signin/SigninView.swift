@@ -6,9 +6,8 @@
 //
 
 import SwiftUI
-import Combine
 
-protocol SignInViewModelProtocol: AnyObject {
+protocol SignInViewModelProtocol: AnyObject, Observable {
     var isLoading: Bool { get }
     var loginError: String? { get }
     func signUp()
@@ -62,7 +61,7 @@ struct SigninView<ViewModel: SignInViewModelProtocol>: View {
                 viewModel.signUp()
             }
             Spacer()
-            Text("Challange made by Lucas Costa Araújo")
+            Text("Challenge made by Lucas Costa Araújo")
         }
         .padding()
     }
@@ -72,7 +71,7 @@ struct SigninView<ViewModel: SignInViewModelProtocol>: View {
     }
 }
 
-fileprivate final class MockViewModel: SignInViewModelProtocol {
+@Observable fileprivate final class MockViewModel: SignInViewModelProtocol {
     var isLoading: Bool = false
     var loginError: String? = ""
     func signUp() { debugPrint("Here is the signup") }

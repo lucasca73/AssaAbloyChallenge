@@ -24,7 +24,7 @@ extension MockNetworkService: LoginService {
 extension MockNetworkService: SignUpService {
     func signUp(firstName: String, lastName: String, email: String, password: String, completion: @escaping (Result<SignupResponse, SignupError>) -> Void) {
         DispatchQueue.global().asyncAfter(deadline: .now() + 1.0) {
-            completion(.success(SignupResponse(id: 1, firstName: "Jorge", lastName: "Washington", email: "email@email.br")))
+            completion(.success(SignupResponse(id: "1", firstName: "Jorge", lastName: "Washington", email: "email@email.br", createdAt: "")))
         }
     }
 }

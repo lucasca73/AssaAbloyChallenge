@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-protocol SignUpViewModelProtocol: AnyObject {
+protocol SignUpViewModelProtocol: AnyObject, Observable {
     var isLoading: Bool { get }
     var signUpError: String? { get }
     var fieldErrors: [SignUpFields: String] { get }
